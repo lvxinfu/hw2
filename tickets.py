@@ -8,7 +8,7 @@ Created on Wed Apr 11 17:06:00 2018
 
 class ticket():
     def __init__(self, i, p):
-        self.sn = i # unique serial number
+        self.serial_number = i # unique serial number
         self.price = p
 
 class screen():
@@ -26,8 +26,8 @@ class screen():
         price = 10 # price from tier 1 to 4: $10, $8, $6, $4
         for i in range(tiers):
             for j in range(c):
-                sn = str(self.date) + str(self.no).zfill(2) + str(c*i+j+1).zfill(2) + str(i+1)
-                self.tickets_list_avlb.append(ticket(sn, price))
+                serial_number = str(self.date) + str(self.no).zfill(2) + str(c*i+j+1).zfill(2) + str(i+1)
+                self.tickets_list_avlb.append(ticket(serial_number, price))
             price -= 2
 
 class theater():
@@ -35,19 +35,19 @@ class theater():
         self.name = n
         self.seats = c
         self.ns = s # num of screens
-        self.sl = [] # screens list
+        self.screens_list = [] # screens list
         
-    def gs(self, n, m, d, s): # generate screens
-        self.sl.append(screen(n, m, d, s))
-        self.sl[-1].generate_tickets(4)
+    def generate_screens(self, n, m, d, s): # generate screens
+        self.screens_list.append(screen(n, m, d, s))
+        self.screens_list[-1].generate_tickets(4)
     
-    def st(self, m, d, t): # sell tickets
-        for i in self.sl:
+    def sell_tickets(self, m, d, t): # sell tickets
+        for i in self.screens_list:
             if i.movie == m and i.date == d:
                 for j in i.tickets_list_avlb:
-                    if j.sn[-1] == t:
+                    if j.serial_number[-1] == t:
                         print("Printing ticket:")
-                        print(j.sn)
+                        print(j.serial_number)
                         i.tickets_list_sold.append(j)
                         i.tickets_list_avlb.remove(j)
                         break
@@ -57,10 +57,10 @@ class theater():
         else:
             print("Invalid movie/date!")
     
-    def rt(self, t): # refund ticket
-        for i in self.sl:
+    def refund_ticket(self, t): # refund ticket
+        for i in self.screens_list:
             for j in i.tickets_list_sold:
-                if j.sn == t:
+                if j.serial_number == t:
                     i.tickets_list_sold.remove(j)
                     i.tickets_list_avlb.append(j)
                     print("Refund for your ticket is done.")
@@ -73,7 +73,7 @@ class theater():
     
     def stats(self, d, n = 0):
         if n != 0:
-            for i in self.sl:
+            for i in self.screens_list:
                 if i.date == d and i.no == int(n):
                     print("Total seats: ", i.seats)
                     print("Tickets sold: ", len(i.tickets_list_sold))
@@ -82,9 +82,8 @@ class theater():
             else:
                 print("Invalid date!")
         else:
-            ts = 0
-            for i in self.sl:
+            total_sold = 0
+            for i in self.screens_list:
                 if i.date == d:
-                    ts += len(i.tickets_list_sold)
-            print("Total tickets sold: ", ts)
-    
+                    total_sold += len(i.tickets_list_sold)
+            print("Total tickets sold: ", total_sold)

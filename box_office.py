@@ -15,8 +15,8 @@ class AppShell(cmd.Cmd):
     event = None
 
     mt = t.theater("my_theater")
-    mt.gs(1, "my_movie_1", "20180401", 40)
-    mt.gs(2, "my_movie_2", "20180401", 40)
+    mt.generate_screens(1, "my_movie_1", "20180401", 40)
+    mt.generate_screens(2, "my_movie_2", "20180401", 40)
     
     def do_quit(self, arg):
       """Quit"""
@@ -26,14 +26,14 @@ class AppShell(cmd.Cmd):
       """Buy a Ticket"""
       args = args.split()
       if int(args[1]) - int(self.today) <= 7:
-          self.mt.st(args[0], args[1], args[2])
+          self.mt.sell_tickets(args[0], args[1], args[2])
       else:
           print("Tickets are sold up to 7 days in advance!")
       
     def do_refund(self, args):
       """Refund a Ticket"""
       if int(self.today) <= int(args[0:8]):
-          self.mt.rt(args)
+          self.mt.refund_ticket(args)
       else:
           print("Refunds can only be given if the movie hasn't started yet!")
       
