@@ -26,9 +26,10 @@ class TestBuy(unittest.TestCase):
     tier_test = "3"
     
     def test_do_buy(self):
+        '''Test do_buy in different conditions'''
         Box_Office_test.do_buy("my_movie_1 20180401 1")
         Box_Office_test.do_buy("my_movie_1 20180410 3")
-        Box_Office_test.do_setd("20180401")
+        Box_Office_test.do_setd("20180401") # set today's date
         Box_Office_test.do_buy("my_movie_1 20180401 1")
         Box_Office_test.do_buy("my_movie_1 20180410 3")
 

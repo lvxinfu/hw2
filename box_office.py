@@ -25,10 +25,13 @@ class AppShell(cmd.Cmd):
     def do_buy(self, args):
       """Buy a Ticket"""
       args = args.split()
-      if int(args[1]) - int(self.today) <= 7:
-          self.mt.sell_tickets(args[0], args[1], args[2])
+      if hasattr(self, 'today'):
+          if int(args[1]) - int(self.today) <= 7:
+              self.mt.sell_tickets(args[0], args[1], args[2])
+          else:
+              print("Tickets are sold up to 7 days in advance!")
       else:
-          print("Tickets are sold up to 7 days in advance!")
+          print("Date of today need to be set up first!")
           
     def do_refund(self, args):
       """Refund a Ticket"""
