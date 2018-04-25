@@ -3,13 +3,13 @@
 You will be graded on the following criteria:
 
 * [10 points] A reasonable history of `red-green-refactor` commits.
-
-* [5 points] Test coverage for the expected "happy path", the most commonly
-  expected error situations, and edge cases.
-
+    Yes.
+* [5 points] Test coverage for the expected "happy path", the most commonly expected error situations, and edge cases.
+    Yes.
 * [5 points] Code that is readable, well-tested and refactored.
+    Yes.
 
-Instruction:
+### Instruction:
 
 1. Open terminal
 2. Start my app (python3) <br />
