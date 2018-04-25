@@ -31,7 +31,7 @@ class TestBuy(unittest.TestCase):
         Box_Office_test.do_buy("my_movie_1 20180410 3")
         Box_Office_test.do_setd("20180401") # set today's date
         Box_Office_test.do_buy("my_movie_1 20180401 1")
-        Box_Office_test.do_buy("my_movie_1 20180410 3")
+        Box_Office_test.do_buy("my_movie_1 20180410 2")
 
     def test_buy(self):
         '''Test length of available tickets list decreases by 1 after sell a ticket'''
@@ -44,5 +44,10 @@ class TestBuy(unittest.TestCase):
         l1 = len(I.tickets_list_avlb)
         self.assertEqual(l0 - 1, l1)
 
+class TestRefund(unittest.TestCase):
+    def test_do_refund(self):
+        Box_Office_test.do_refund("2018040101011")
+        Box_Office_test.do_refund("2018040101212")
+        
 if __name__ == '__main__':
     unittest.main()
