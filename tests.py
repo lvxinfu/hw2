@@ -65,5 +65,11 @@ class TestRefund(unittest.TestCase):
         l1 = len(I.tickets_list_avlb)
         self.assertEqual(l0 + 1, l1)
 
+class TestStats(unittest.TestCase):
+    def test_do_stats(self):
+        Box_Office_test.do_stats("20180400")
+        Box_Office_test.do_stats("20180401")
+        Box_Office_test.do_stats("20180402")
+
 if __name__ == '__main__':
     unittest.main()
