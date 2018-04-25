@@ -17,17 +17,17 @@ class screen():
         self.movie = m
         self.date = d
         self.seats = s
-        self.tl_avlb = [] # available tickits list
-        self.tl_sold = [] # sold tickets list
+        self.tickets_list_avlb = [] # available tickits list
+        self.tickets_list_sold = [] # sold tickets list
 
-    def gt(self, t): # generate tickets
+    def generate_tickets(self, t): # generate tickets
         tiers = t
         c = self.seats // tiers # seats each tier
         price = 10 # price from tier 1 to 4: $10, $8, $6, $4
         for i in range(tiers):
             for j in range(c):
                 sn = str(self.date) + str(self.no).zfill(2) + str(c*i+j+1).zfill(2) + str(i+1)
-                self.tl_avlb.append(ticket(sn, price))
+                self.tickets_list_avlb.append(ticket(sn, price))
             price -= 2
 
 class theater():
@@ -39,17 +39,17 @@ class theater():
         
     def gs(self, n, m, d, s): # generate screens
         self.sl.append(screen(n, m, d, s))
-        self.sl[-1].gt(4)
+        self.sl[-1].generate_tickets(4)
     
     def st(self, m, d, t): # sell tickets
         for i in self.sl:
             if i.movie == m and i.date == d:
-                for j in i.tl_avlb:
+                for j in i.tickets_list_avlb:
                     if j.sn[-1] == t:
                         print("Printing ticket:")
                         print(j.sn)
-                        i.tl_sold.append(j)
-                        i.tl_avlb.remove(j)
+                        i.tickets_list_sold.append(j)
+                        i.tickets_list_avlb.remove(j)
                         break
                 else:
                     print("All tickets are sold out!")
@@ -59,10 +59,10 @@ class theater():
     
     def rt(self, t): # refund ticket
         for i in self.sl:
-            for j in i.tl_sold:
+            for j in i.tickets_list_sold:
                 if j.sn == t:
-                    i.tl_sold.remove(j)
-                    i.tl_avlb.append(j)
+                    i.tickets_list_sold.remove(j)
+                    i.tickets_list_avlb.append(j)
                     print("Refund for your ticket is done.")
                     break
             else:
@@ -76,8 +76,8 @@ class theater():
             for i in self.sl:
                 if i.date == d and i.no == int(n):
                     print("Total seats: ", i.seats)
-                    print("Tickets sold: ", len(i.tl_sold))
-                    print("Vacant seats: ", len(i.tl_avlb))
+                    print("Tickets sold: ", len(i.tickets_list_sold))
+                    print("Vacant seats: ", len(i.tickets_list_avlb))
                     break
             else:
                 print("Invalid date!")
@@ -85,6 +85,6 @@ class theater():
             ts = 0
             for i in self.sl:
                 if i.date == d:
-                    ts += len(i.tl_sold)
+                    ts += len(i.tickets_list_sold)
             print("Total tickets sold: ", ts)
     
