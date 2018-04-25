@@ -7,21 +7,21 @@ Created on Wed Apr 11 17:06:00 2018
 """
 
 class Theater():
-    def __init__(self, n, c = 200, s = 5):
-        self.name = n
+    def __init__(self, name, c = 200, s = 5):
+        self.name = name
         self.seats = c
         self.ns = s # num of screens
         self.screens_list = [] # screens list
         
-    def generate_screens(self, n, m, d, s): # generate screens
-        self.screens_list.append(Screen(n, m, d, s))
+    def generate_screens(self, n, movie, date, seats): # generate screens
+        self.screens_list.append(Screen(n, movie, date, seats))
         self.screens_list[-1].generate_tickets(4)
     
-    def sell_tickets(self, m, d, t): # sell tickets
+    def sell_tickets(self, movie, date, tier): # sell tickets
         for i in self.screens_list:
-            if i.movie == m and i.date == d:
+            if i.movie == movie and i.date == date:
                 for j in i.tickets_list_avlb:
-                    if j.serial_number[-1] == t:
+                    if j.serial_number[-1] == tier:
                         print("Printing ticket:")
                         print(j.serial_number)
                         i.tickets_list_sold.append(j)
@@ -33,10 +33,10 @@ class Theater():
         else:
             print("Invalid movie/date!")
     
-    def refund_ticket(self, t): # refund ticket
+    def refund_ticket(self, serial_number): # refund ticket
         for i in self.screens_list:
             for j in i.tickets_list_sold:
-                if j.serial_number == t:
+                if j.serial_number == serial_number:
                     i.tickets_list_sold.remove(j)
                     i.tickets_list_avlb.append(j)
                     print("Refund for your ticket is done.")
@@ -47,10 +47,10 @@ class Theater():
         else:
             print("Invalid ticket!")
     
-    def stats(self, d, n = 0):
+    def stats(self, date, n = 0):
         if n != 0:
             for i in self.screens_list:
-                if i.date == d and i.no == int(n):
+                if i.date == date and i.no == int(n):
                     print("Total seats: ", i.seats)
                     print("Tickets sold: ", len(i.tickets_list_sold))
                     print("Vacant seats: ", len(i.tickets_list_avlb))
@@ -60,16 +60,16 @@ class Theater():
         else:
             total_sold = 0
             for i in self.screens_list:
-                if i.date == d:
+                if i.date == date:
                     total_sold += len(i.tickets_list_sold)
             print("Total tickets sold: ", total_sold)
 
 class Screen():
-    def __init__(self, n, m, d, s):
+    def __init__(self, n, movie, date, seats):
         self.no = n # screen no.
-        self.movie = m
-        self.date = d
-        self.seats = s
+        self.movie = movie
+        self.date = date
+        self.seats = seats
         self.tickets_list_avlb = [] # available tickits list
         self.tickets_list_sold = [] # sold tickets list
 
@@ -84,6 +84,6 @@ class Screen():
             price -= 2
 
 class Ticket():
-    def __init__(self, i, p):
+    def __init__(self, i, price):
         self.serial_number = i # unique serial number
-        self.price = p
+        self.price = price
