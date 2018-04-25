@@ -1,12 +1,8 @@
-### Grading Rubric
-
-You will be graded on the following criteria:
-
-* [10 points] A reasonable history of `red-green-refactor` commits.
+* [10 points] **A reasonable history of `red-green-refactor` commits.**
     Yes.
-* [5 points] Test coverage for the expected "happy path", the most commonly expected error situations, and edge cases.
+* [5 points] **Test coverage for the expected "happy path", the most commonly expected error situations, and edge cases.**
     Yes.
-* [5 points] Code that is readable, well-tested and refactored.
+* [5 points] **Code that is readable, well-tested and refactored.**
     Yes.
 
 ### Instruction:
