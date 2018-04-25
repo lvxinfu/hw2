@@ -44,10 +44,26 @@ class TestBuy(unittest.TestCase):
         l1 = len(I.tickets_list_avlb)
         self.assertEqual(l0 - 1, l1)
 
-class TestRefund(unittest.TestCase):
+class TestRefund(unittest.TestCase):    
     def test_do_refund(self):
         Box_Office_test.do_refund("2018040101011")
-        Box_Office_test.do_refund("2018040101212")
-        
+        Box_Office_test.do_refund("2018040101112")
+        Box_Office_test.do_setd("20180402") # set today's date
+        Box_Office_test.do_refund("2018040101213")
+
+    def test_refund(self):
+        Box_Office_test.do_setd("20180402") # set today's date
+        Box_Office_test.do_buy("my_movie_1 20180402 1")
+        self.serial_number_test = "2018040201011"
+        for i in Box_Office_test.mt.screens_list:
+            for j in i.tickets_list_sold:
+                if j.serial_number == self.serial_number_test:
+                    I = i
+                    break
+        l0 = len(I.tickets_list_avlb)
+        Box_Office_test.mt.refund_ticket("2018040201011")
+        l1 = len(I.tickets_list_avlb)
+        self.assertEqual(l0 + 1, l1)
+
 if __name__ == '__main__':
     unittest.main()
