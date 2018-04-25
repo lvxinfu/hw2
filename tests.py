@@ -23,13 +23,13 @@ class TestTheater(unittest.TestCase):
 class TestBuy(unittest.TestCase):
     def test_do_buy(self):
         '''Test do_buy under different conditions'''
-        Box_Office_test.do_buy("my_movie_1 20180401 1")
+        Box_Office_test.do_buy("my_movie_1 20180401 1 3")
         print()
         Box_Office_test.do_setd("20180401") # set today's date
         print()
-        Box_Office_test.do_buy("my_movie_1 20180401 1")
+        Box_Office_test.do_buy("my_movie_1 20180401 1 2")
         print()
-        Box_Office_test.do_buy("my_movie_1 20180410 2")
+        Box_Office_test.do_buy("my_movie_1 20180410 2 1")
         print()
 
     def test_buy(self):
@@ -66,7 +66,7 @@ class TestRefund(unittest.TestCase):
         '''Test length of available tickets list increases by 1 after refund a ticket'''
         Box_Office_test.do_setd("20180402") # set today's date
         print()
-        Box_Office_test.do_buy("my_movie_1 20180402 1")
+        Box_Office_test.do_buy("my_movie_1 20180402 1 3")
         print()
         serial_number_test = "2018040201011"
         

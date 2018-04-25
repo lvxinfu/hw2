@@ -15,12 +15,13 @@
 4. Set today's date <br />
     `> setd 20180401`
 5. Buy a ticket <br />
-    command buy syntax -- buy movie_name date tier <br />
-    `> buy my_movie_1 20180401 3` <br />
+    command buy syntax -- buy movie_name date tier num_of_tickets <br />
+    this syntax is changed from hw1 by adding num_of_tickets <br />
+    `> buy my_movie_1 20180401 3 3` <br />
     *this will print ticket's serial number* <br />
-    `> buy my_movie_2 20180401 4` <br />
+    `> buy my_movie_2 20180401 4 2` <br />
     *this will print ticket's serial number* <br />
-    `> buy my_movie_1 20180410 1` <br />
+    `> buy my_movie_1 20180410 1 1` <br />
     *this will print 7-day warning* <br />
 6. Refund a ticket <br />
     command refund syntax -- refund ticket_sn <br />

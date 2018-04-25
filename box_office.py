@@ -27,7 +27,9 @@ class AppShell(cmd.Cmd):
       args = args.split()
       if hasattr(self, 'today'):
           if int(args[1]) - int(self.today) <= 7:
-              self.mt.sell_tickets(args[0], args[1], args[2])
+              for i in range(int(args[-1])):
+                  self.mt.sell_tickets(args[0], args[1], args[2])
+                  print()
           else:
               print("Tickets are sold up to 7 days in advance!")
       else:
@@ -52,6 +54,7 @@ class AppShell(cmd.Cmd):
       """Set today's date"""
       self.today = args
       print("Set today's date to", args)
+      self.mt.generate_screens(1, "my_movie_1", self.today, 40)
 
 if __name__ == '__main__':
     AppShell().cmdloop()
