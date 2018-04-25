@@ -24,6 +24,13 @@ class TestBuy(unittest.TestCase):
     movie_test = "my_movie_1"
     date_test = "20180401"
     tier_test = "3"
+    
+    def test_do_buy(self):
+        Box_Office_test.do_buy("my_movie_1 20180401 1")
+        Box_Office_test.do_buy("my_movie_1 20180410 3")
+        Box_Office_test.do_setd("20180401")
+        Box_Office_test.do_buy("my_movie_1 20180401 1")
+        Box_Office_test.do_buy("my_movie_1 20180410 3")
 
     def test_buy(self):
         '''Test length of available tickets list decreases by 1 after sell a ticket'''
